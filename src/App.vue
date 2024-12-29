@@ -59,10 +59,10 @@ const addManga = () => {
 
 <template>
   <div
-    class="flex justify-center items-center h-screen bg-gray-100 text-gray-800"
+    class="flex justify-center items-start h-screen bg-gray-100 text-gray-800"
   >
     <div class="border p-5 w-full">
-      <h1 class="font-bold text-lg my-2">Manga Lists</h1>
+      <h1 class="font-bold text-lg mb-2">Manga Ratings by Me</h1>
 
       <div class="flex justify-center items-center">
         <div class="size-52">
@@ -72,12 +72,13 @@ const addManga = () => {
       <div>
         <button
           @click="addManga"
-          class="w-32 bg-gray-800 text-white font-semibold text-sm py-2"
+          class="w-32 bg-gray-800 my-2 text-white font-semibold text-sm py-2"
         >
           Add Manga
         </button>
       </div>
 
+      <h1 class="font-bold text-lg my-2">Manga Lists</h1>
       <!-- table -->
       <div class="flex flex-wrap gap-2">
         <div class="relative overflow-x-auto shadow-sm w-full">
