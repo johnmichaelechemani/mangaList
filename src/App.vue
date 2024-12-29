@@ -9,6 +9,8 @@ import {
   addDoc,
   serverTimestamp,
   getDocs,
+  doc,
+  deleteDoc,
   query,
   where,
   onSnapshot,
@@ -19,6 +21,7 @@ const name = ref("");
 const chapter = ref("");
 const status = ref("");
 const rating = ref("");
+const showModal = ref(false);
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "vue-chartjs";
@@ -42,6 +45,8 @@ const add = async () => {
 
     console.log("Adding Success");
     clear();
+    showModal.value = false;
+    clear();
   } catch (e) {
     console.log("Error", e);
   }
@@ -50,10 +55,22 @@ const add = async () => {
 onMounted(() => {
   getManga();
 });
-
-const showModal = ref(false);
 const addManga = () => {
   showModal.value = !showModal.value;
+};
+
+const editList = (id) => {
+  console.log("edit list", id);
+};
+const deleteList = (id) => {
+  try {
+    const itemRef = doc(db, "manga", id);
+    deleteDoc(itemRef);
+    console.log("Item successfully deleted");
+  } catch (error) {
+    console.error("Error deleting item:", error);
+  }
+  console.log("delete list", id);
 };
 </script>
 
@@ -78,7 +95,12 @@ const addManga = () => {
         </button>
       </div>
 
-      <h1 class="font-bold text-lg my-2">Manga Lists</h1>
+      <h1 class="font-bold text-lg my-2">
+        Manga Lists
+        <span class="text-sm bg-gray-800 text-white px-2 rounded-full">{{
+          manga.length
+        }}</span>
+      </h1>
       <!-- table -->
       <div class="flex flex-wrap gap-2">
         <div class="relative overflow-x-auto shadow-sm w-full">
@@ -103,6 +125,7 @@ const addManga = () => {
                 <td class="px-2 py-3">{{ item.rating }}</td>
                 <td class="px-2 py-3 flex justify-start items-center gap-2">
                   <button
+                    @click="editList(item.id)"
                     class="font-medium text-green-500 border border-green-500/20 p-1"
                   >
                     <Icon
@@ -112,6 +135,7 @@ const addManga = () => {
                     />
                   </button>
                   <button
+                    @click="deleteList(item.id)"
                     class="font-medium text-red-500 border border-red-500/20 p-1"
                   >
                     <Icon
