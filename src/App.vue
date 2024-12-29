@@ -18,7 +18,7 @@ import {
 
 const db = getFirestore();
 const name = ref("");
-const chapter = ref("");
+const chapter = ref(null);
 const status = ref("");
 const rating = ref(null);
 const showModal = ref(false);
@@ -115,7 +115,7 @@ const getRatingClass = (rating) => {
       <h1 class="font-bold text-lg mb-2">Manga Ratings by Me</h1>
 
       <div class="flex justify-center items-center">
-        <div class="size-52">
+        <div class="size-48">
           <Pie :data="data" :options="options" />
         </div>
       </div>
@@ -141,7 +141,7 @@ const getRatingClass = (rating) => {
             <thead class="text-xs text-gray-800 border">
               <tr>
                 <th scope="col" class="px-2 py-3">Name</th>
-                <th scope="col" class="px-2 py-3">Chapter</th>
+                <th scope="col" class="px-2 py-3">Latest Chapter</th>
                 <th scope="col" class="px-2 py-3">Status</th>
                 <th scope="col" class="px-2 py-3">Rating</th>
 
@@ -154,7 +154,18 @@ const getRatingClass = (rating) => {
                   {{ item.name }}
                 </th>
                 <td class="px-2 py-3">{{ item.chapter }}</td>
-                <td class="px-2 py-3">{{ item.status }}</td>
+                <td class="px-2 py-3">
+                  <p
+                    :class="
+                      item.status === 'ongoing'
+                        ? 'bg-orange-500'
+                        : 'bg-green-500'
+                    "
+                    class="px-2 capitalize font-semibold text-white text-center w-20 rounded-full py-0.5"
+                  >
+                    {{ item.status }}
+                  </p>
+                </td>
                 <td class="px-2 py-3">
                   <p
                     :class="getRatingClass(item.rating)"
@@ -230,19 +241,23 @@ const getRatingClass = (rating) => {
                 <p class="text-xs font-semibold">Chapter</p>
                 <input
                   v-model="chapter"
-                  type="text"
+                  type="number"
                   required
                   class="border p-1 border-gray-700/50 text-xs w-full outline-none bg-transparent"
                 />
               </div>
               <div class="my-1">
                 <p class="text-xs font-semibold">Status</p>
-                <input
-                  type="text"
-                  v-model="status"
+                <select
+                  name=""
+                  id=""
                   required
-                  class="border p-1 border-gray-700/50 text-xs w-full outline-none bg-transparent"
-                />
+                  v-model="status"
+                  class="border p-1 border-gray-700/50 outline-none text-xs w-full bg-transparent"
+                >
+                  <option value="ongoing">Ongoing</option>
+                  <option value="finished">Finished</option>
+                </select>
               </div>
               <div class="my-1">
                 <p class="text-xs font-semibold">Rating</p>
