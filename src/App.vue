@@ -20,7 +20,7 @@ const db = getFirestore();
 const name = ref("");
 const chapter = ref("");
 const status = ref("");
-const rating = ref("");
+const rating = ref(null);
 const showModal = ref(false);
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
@@ -72,6 +72,39 @@ const deleteList = (id) => {
   }
   console.log("delete list", id);
 };
+const getRatingText = (rating) => {
+  switch (rating) {
+    case 5:
+      return "Excellent";
+    case 4:
+      return "Best";
+    case 3:
+      return "Normal";
+    case 2:
+      return "Poor";
+    case 1:
+      return "Very Poor";
+    default:
+      return "";
+  }
+};
+
+const getRatingClass = (rating) => {
+  switch (rating) {
+    case 5:
+      return " bg-green-500";
+    case 4:
+      return "bg-blue-500";
+    case 3:
+      return "bg-yellow-500";
+    case 2:
+      return "bg-orange-500";
+    case 1:
+      return "bg-red-500";
+    default:
+      return "";
+  }
+};
 </script>
 
 <template>
@@ -122,7 +155,14 @@ const deleteList = (id) => {
                 </th>
                 <td class="px-2 py-3">{{ item.chapter }}</td>
                 <td class="px-2 py-3">{{ item.status }}</td>
-                <td class="px-2 py-3">{{ item.rating }}</td>
+                <td class="px-2 py-3">
+                  <p
+                    :class="getRatingClass(item.rating)"
+                    class="px-2 font-semibold text-white text-center w-20 rounded-full py-0.5"
+                  >
+                    {{ getRatingText(item.rating) }}
+                  </p>
+                </td>
                 <td class="px-2 py-3 flex justify-start items-center gap-2">
                   <button
                     @click="editList(item.id)"
@@ -206,12 +246,20 @@ const deleteList = (id) => {
               </div>
               <div class="my-1">
                 <p class="text-xs font-semibold">Rating</p>
-                <input
-                  type="text"
-                  v-model="rating"
+
+                <select
+                  name=""
+                  id=""
                   required
-                  class="border p-1 border-gray-700/50 text-xs w-full outline-none bg-transparent"
-                />
+                  v-model="rating"
+                  class="border p-1 border-gray-700/50 outline-none text-xs w-full bg-transparent"
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
               </div>
             </div>
             <div class="flex justify-start w-full items-center gap-2 my-2">
