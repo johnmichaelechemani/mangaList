@@ -1,7 +1,8 @@
 <script setup>
-import { manga, getManga } from "./store";
+import { manga, getManga, options, data } from "./store";
 import { Icon } from "@iconify/vue";
 import { ref, onMounted } from "vue";
+import { Bar } from "vue-chartjs";
 import {
   getFirestore,
   collection,
@@ -19,6 +20,10 @@ const chapter = ref("");
 const status = ref("");
 const rating = ref("");
 
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Pie } from "vue-chartjs";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 const clear = () => {
   name.value = "";
   chapter.value = "";
@@ -51,9 +56,13 @@ onMounted(() => {
   <div
     class="flex justify-center items-center h-screen bg-gray-100 text-gray-800"
   >
-    <div class="border p-5">
+    <div class="border p-5 w-full">
       <h1 class="font-semibold text-lg my-2">Manga Lists</h1>
-
+      <div class="flex justify-center items-center">
+        <div class="size-52">
+          <Pie :data="data" :options="options" />
+        </div>
+      </div>
       <!-- add manga -->
       <div class="grid sm:grid-cols-2 grid-cols-1 gap-2">
         <div class="my-1">
@@ -89,7 +98,7 @@ onMounted(() => {
           />
         </div>
       </div>
-      <div class="flex justify-start items-center gap-2 my-2">
+      <div class="flex justify-start w-full items-center gap-2 my-2">
         <button
           @click="clear"
           class="w-32 border bg-gray-300 font-semibold text-sm py-2"
@@ -105,7 +114,7 @@ onMounted(() => {
       </div>
 
       <!-- table -->
-      <div>
+      <div class="flex flex-wrap gap-2">
         <div class="relative overflow-x-auto shadow-sm w-full">
           <table class="w-full text-sm text-left">
             <thead class="text-xs text-gray-800 border">
@@ -123,10 +132,10 @@ onMounted(() => {
                 <th scope="row" class="px-2 py-2 font-medium whitespace-nowrap">
                   {{ item.name }}
                 </th>
-                <td class="px-6 py-4">{{ item.chapter }}</td>
-                <td class="px-6 py-4">{{ item.status }}</td>
-                <td class="px-6 py-4">{{ item.rating }}</td>
-                <td class="px-6 py-4 flex justify-start items-center gap-2">
+                <td class="px-2 py-3">{{ item.chapter }}</td>
+                <td class="px-2 py-3">{{ item.status }}</td>
+                <td class="px-2 py-3">{{ item.rating }}</td>
+                <td class="px-2 py-3 flex justify-start items-center gap-2">
                   <button
                     class="font-medium text-green-500 border border-green-500/20 p-1"
                   >
