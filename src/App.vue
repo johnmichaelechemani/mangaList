@@ -2,6 +2,45 @@
 import { manga, getManga } from "./store";
 import { Icon } from "@iconify/vue";
 import { ref, onMounted } from "vue";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  serverTimestamp,
+  getDocs,
+  query,
+  where,
+  onSnapshot,
+} from "firebase/firestore";
+
+const db = getFirestore();
+const name = ref("");
+const chapter = ref("");
+const status = ref("");
+const rating = ref("");
+
+const clear = () => {
+  name.value = "";
+  chapter.value = "";
+  status.value = "";
+  rating.value = "";
+};
+const add = async () => {
+  try {
+    await addDoc(collection(db, "manga"), {
+      name: name.value,
+      chapter: chapter.value,
+      status: status.value,
+      rating: rating.value,
+      timestamp: serverTimestamp(),
+    });
+
+    console.log("Adding Success");
+    clear();
+  } catch (e) {
+    console.log("Error", e);
+  }
+};
 
 onMounted(() => {
   getManga();
@@ -21,12 +60,14 @@ onMounted(() => {
           <p class="text-xs font-semibold">Name</p>
           <input
             type="text"
+            v-model="name"
             class="border p-1 text-xs w-full outline-none bg-transparent"
           />
         </div>
         <div class="my-1">
           <p class="text-xs font-semibold">Chapter</p>
           <input
+            v-model="chapter"
             type="text"
             class="border p-1 text-xs w-full outline-none bg-transparent"
           />
@@ -35,6 +76,7 @@ onMounted(() => {
           <p class="text-xs font-semibold">Status</p>
           <input
             type="text"
+            v-model="status"
             class="border p-1 text-xs w-full outline-none bg-transparent"
           />
         </div>
@@ -42,13 +84,24 @@ onMounted(() => {
           <p class="text-xs font-semibold">Rating</p>
           <input
             type="text"
+            v-model="rating"
             class="border p-1 text-xs w-full outline-none bg-transparent"
           />
         </div>
       </div>
-      <div>
-        <button>Clear</button>
-        <button>Add</button>
+      <div class="flex justify-start items-center gap-2 my-2">
+        <button
+          @click="clear"
+          class="w-32 border bg-gray-300 font-semibold text-sm py-2"
+        >
+          Clear
+        </button>
+        <button
+          @click="add"
+          class="w-32 bg-gray-800 text-white font-semibold text-sm py-2"
+        >
+          Add
+        </button>
       </div>
 
       <!-- table -->

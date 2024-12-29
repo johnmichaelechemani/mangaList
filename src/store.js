@@ -26,7 +26,6 @@ export const getManga = () => {
     return manga.value;
   } catch (error) {
     console.error("Error fetching manga:", error);
-
     return [];
   }
 };
