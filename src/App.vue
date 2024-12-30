@@ -1,7 +1,7 @@
 <script setup>
 import { manga, getManga, options, data } from "./store";
 import { Icon } from "@iconify/vue";
-import { ref, onMounted, Transition } from "vue";
+import { ref, onMounted, Transition, computed } from "vue";
 import {
   getFirestore,
   collection,
@@ -16,6 +16,13 @@ import listCard from "./components/listCard.vue";
 const db = getFirestore();
 const showModal = ref(false);
 ChartJS.register(ArcElement, Tooltip, Legend);
+
+const filteredManga = computed(() => {
+  if (!search.value) return manga.value;
+  return manga.value.filter((item) =>
+    item.name.toLowerCase().includes(search.value.toLowerCase())
+  );
+});
 
 const add = async (mangaData) => {
   try {
@@ -86,7 +93,24 @@ const addManga = () => {
         }}</span>
       </h1>
 
-      <listCard :manga="manga" />
+      <template v-if="filteredManga.length > 0">
+        <listCard :manga="filteredManga" />
+      </template>
+      <div v-else class="text-center p-4 bg-gray-100 rounded-lg text-gray-500">
+        <Icon
+          icon="mdi:book-search-outline"
+          class="mx-auto mb-2"
+          width="48"
+          height="48"
+        />
+        <p class="text-xs">No manga found matching "{{ search }}"</p>
+        <button
+          @click="search = ''"
+          class="mt-2 text-xs text-blue-500 font-semibold border p-2"
+        >
+          Clear Search
+        </button>
+      </div>
     </div>
   </div>
 
