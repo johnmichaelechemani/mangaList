@@ -22,35 +22,37 @@ const sortBy = ref("");
 const search = ref("");
 const searchList = () => {};
 
+const ongoing = computed(() => {
+  return manga.value.filter((item) => item.status === "ongoing").length;
+});
+const finished = computed(() => {
+  return manga.value.filter((item) => item.status === "finished").length;
+});
+const dropped = computed(() => {
+  return manga.value.filter((item) => item.status === "dropped").length;
+});
+
 const filteredAndSortedManga = computed(() => {
   let result = manga.value;
-
-  // Filter by search
   if (search.value) {
     result = result.filter((item) =>
       item.name.toLowerCase().includes(search.value.toLowerCase())
     );
   }
-
-  // Filter by status
   if (statusFilter.value) {
     result = result.filter((item) => item.status === statusFilter.value);
   }
 
-  // Filter by rating
   if (ratingFilter.value) {
     result = result.filter(
       (item) => item.rating === Number(ratingFilter.value)
     );
   }
-
-  // Sorting logic
   if (sortBy.value === "rating-asc") {
     result = result.sort((a, b) => a.rating - b.rating);
   } else if (sortBy.value === "rating-desc") {
     result = result.sort((a, b) => b.rating - a.rating);
   }
-
   return result;
 });
 
@@ -111,7 +113,26 @@ const addManga = () => {
         </button>
       </div>
 
-      <div class="flex justify-center items-center">
+      <div class="flex justify-start items-start pt-3">
+        <div class="w-full border p-2">
+          <div
+            class="text-xs font-semibold flex justify-start items-center gap-1"
+          >
+            Mangas Total:
+            <span class="text-sm font-extrabold">{{ manga.length }}</span>
+          </div>
+          <div>
+            <p class="text-xs border px-1 mb-0.5 font-semibold">
+              Ongoing: {{ ongoing }}
+            </p>
+            <p class="text-xs border px-1 mb-0.5 font-semibold">
+              Finished: {{ finished }}
+            </p>
+            <p class="text-xs border px-1 mb-0.5 font-semibold">
+              Dropped: {{ dropped }}
+            </p>
+          </div>
+        </div>
         <div class="size-48">
           <Pie :data="generateMangaRatingData()" :options="options" />
         </div>
