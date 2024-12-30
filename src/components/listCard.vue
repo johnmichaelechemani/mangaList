@@ -30,9 +30,12 @@
             icon="material-symbols-light:detector-status"
             width="24"
             height="24"
-            :class="
-              item.status === 'ongoing' ? 'text-orange-500' : 'text-green-500'
-            "
+            :class="{
+              'text-orange-500': item.status === 'ongoing',
+              'text-green-500': item.status === 'finished',
+              'text-red-500':
+                item.status !== 'ongoing' && item.status !== 'finished',
+            }"
           />{{ item.status }}
         </div>
         <div

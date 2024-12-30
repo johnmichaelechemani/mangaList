@@ -5,15 +5,21 @@ import {
   serverTimestamp,
   doc,
   deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 
 export const editList = (item) => {
   const db = getFirestore();
   console.log("edit list", item.id, item.name);
+
+  try {
+    const itemRef = doc(db, "manga", item.id);
+    updateDoc(itemRef, item);
+    console.log("Item successfully updated");
+  } catch (error) {
+    console.error("Error updating item:", error);
+  }
 };
-
-
-
 
 export const deleteList = (id) => {
   const db = getFirestore();
@@ -26,7 +32,6 @@ export const deleteList = (id) => {
   }
   console.log("delete list", id);
 };
-
 
 export const Time = (timestamp) => {
   if (timestamp) {

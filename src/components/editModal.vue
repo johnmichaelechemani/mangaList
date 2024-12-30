@@ -13,7 +13,6 @@
               />
             </div>
           </div>
-
           <div class="grid sm:grid-cols-2 grid-cols-1 gap-2">
             <div class="my-1">
               <p class="text-xs font-semibold">Name</p>
@@ -72,7 +71,6 @@
               class="w-32 bg-gray-800 text-white font-semibold text-sm py-2"
             >
               Save Changes
-              <!-- Changed button text to reflect action -->
             </button>
           </div>
         </form>
@@ -105,6 +103,7 @@ const editManga = () => {
 };
 
 const edit = () => {
-  editList(props.manga); // Pass the updated manga object
+  editList(props.manga);
+  emit("close");
 };
 </script>
