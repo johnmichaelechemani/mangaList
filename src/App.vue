@@ -142,7 +142,7 @@ const addManga = () => {
           />
           Filter:
         </div>
-        <div class="grid grid-cols-2 gap-2">
+        <div class="grid grid-cols-2 gap-1">
           <div
             class="border px-1 text-xs font-semibold flex justify-start items-center"
           >
@@ -194,8 +194,14 @@ const addManga = () => {
           </div>
           <button
             @click="resetFilters"
-            class="text-xs bg-gray-200 px-2 py-1 rounded"
+            class="border px-1 gap-1 text-xs font-semibold flex justify-start items-center"
           >
+            <Icon
+              icon="material-symbols-light:reset-wrench-outline-rounded"
+              width="24"
+              height="24"
+              class="text-red-500"
+            />
             Reset Filters
           </button>
         </div>
