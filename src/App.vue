@@ -2,14 +2,11 @@
 import { manga, getManga, options, data } from "./store";
 import { Icon } from "@iconify/vue";
 import { ref, onMounted, Transition } from "vue";
-import { getRatingClass, getRatingText } from "./composables";
 import {
   getFirestore,
   collection,
   addDoc,
   serverTimestamp,
-  doc,
-  deleteDoc,
 } from "firebase/firestore";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "vue-chartjs";
