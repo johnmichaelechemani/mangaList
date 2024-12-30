@@ -2,11 +2,11 @@
   <div v-if="showModal" class="fixed inset-0 z-50 bg-gray-800/30 backdrop-blur">
     <div class="relative flex justify-center items-center h-full text-gray-800">
       <div class="relative bg-gray-200 border p-5">
-        <form action="" @submit.prevent="add">
+        <form action="">
           <!-- add manga -->
           <div class="flex justify-between items-center mb-2">
-            <p class="text-lg font-extrabold">Enter Manga Data</p>
-            <div @click="addManga">
+            <p class="text-lg font-extrabold">Edit Manga Data</p>
+            <div @click="editManga">
               <Icon
                 icon="material-symbols-light:close"
                 width="24"
@@ -20,7 +20,7 @@
               <p class="text-xs font-semibold">Name</p>
               <input
                 type="text"
-                v-model="name"
+                v-model="manga.name"
                 required
                 class="border border-gray-700/50 p-1 text-xs w-full outline-none bg-transparent"
               />
@@ -28,7 +28,7 @@
             <div class="my-1">
               <p class="text-xs font-semibold">Chapter</p>
               <input
-                v-model="chapter"
+                v-model="manga.chapter"
                 type="number"
                 required
                 class="border p-1 border-gray-700/50 text-xs w-full outline-none bg-transparent"
@@ -37,24 +37,20 @@
             <div class="my-1">
               <p class="text-xs font-semibold">Status</p>
               <select
-                name=""
-                id=""
                 required
-                v-model="status"
+                v-model="manga.status"
                 class="border p-1 border-gray-700/50 outline-none text-xs w-full bg-transparent"
               >
                 <option value="ongoing">Ongoing</option>
                 <option value="finished">Finished</option>
+                <option value="dropped">Dropped</option>
               </select>
             </div>
             <div class="my-1">
               <p class="text-xs font-semibold">Rating</p>
-
               <select
-                name=""
-                id=""
                 required
-                v-model="rating"
+                v-model="manga.rating"
                 class="border p-1 border-gray-700/50 outline-none text-xs w-full bg-transparent"
               >
                 <option value="1">1</option>
@@ -67,16 +63,17 @@
           </div>
           <div class="flex justify-start w-full items-center gap-2 my-2">
             <button
-              @click="clear"
+              @click.prevent="editManga"
               class="w-32 border bg-gray-300 font-semibold text-sm py-2"
             >
-              Clear
+              Cancel
             </button>
             <button
-              type="submit"
+              @click.prevent="edit"
               class="w-32 bg-gray-800 text-white font-semibold text-sm py-2"
             >
-              Add
+              Save Changes
+              <!-- Changed button text to reflect action -->
             </button>
           </div>
         </form>
@@ -84,3 +81,31 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import { defineProps, defineEmits } from "vue";
+import { Icon } from "@iconify/vue";
+import { editList } from "@/composables";
+
+const props = defineProps({
+  showModal: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  manga: {
+    type: Object,
+    required: true,
+  },
+});
+
+const emit = defineEmits(["close", "edit-manga"]);
+
+const editManga = () => {
+  emit("close");
+};
+
+const edit = () => {
+  editList(props.manga); // Pass the updated manga object
+};
+</script>

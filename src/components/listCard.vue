@@ -48,7 +48,7 @@
       </div>
       <div class="gap-1 flex">
         <button
-          @click="editList(item.id)"
+          @click="editManga(item)"
           class="font-medium text-green-500 border border-green-500/20 px-1 py-0.5"
         >
           <Icon
@@ -70,15 +70,35 @@
       </div>
     </div>
   </div>
+
+  <transition>
+    <EditModal
+      :show-modal="showEditModal"
+      :manga="selected"
+      @close="showEditModal = false"
+      @edit-manga="close"
+    />
+  </transition>
 </template>
 <script setup>
 import { Icon } from "@iconify/vue";
 import { ref, defineProps } from "vue";
-import { editList, deleteList, Time } from "@/composables";
+import { deleteList, Time } from "@/composables";
+import EditModal from "./editModal.vue";
 const props = defineProps({
   manga: {
     type: Object,
     required: true,
   },
 });
+const showEditModal = ref(false);
+const selected = ref([]);
+const editManga = (item) => {
+  selected.value = item;
+  showEditModal.value = !showEditModal.value;
+};
+const close = () => {
+  selected.value = [];
+  showEditModal.value = false;
+};
 </script>

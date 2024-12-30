@@ -7,10 +7,14 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 
-export const editList = (id) => {
+export const editList = (item) => {
   const db = getFirestore();
-  console.log("edit list", id);
+  console.log("edit list", item.id, item.name);
 };
+
+
+
+
 export const deleteList = (id) => {
   const db = getFirestore();
   try {
