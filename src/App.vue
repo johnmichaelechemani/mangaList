@@ -33,46 +33,49 @@ const dropped = computed(() => {
 });
 
 const filteredAndSortedManga = computed(() => {
-  let result = manga.value;
-  if (search.value) {
-    result = result.filter((item) =>
-      item.name.toLowerCase().includes(search.value.toLowerCase())
-    );
-  }
-  if (statusFilter.value) {
-    result = result.filter((item) => item.status === statusFilter.value);
-  }
+  const filterManga = (items) => {
+    return items
+      .filter(
+        (item) =>
+          !search.value ||
+          item.name.toLowerCase().includes(search.value.toLowerCase())
+      )
+      .filter(
+        (item) => !statusFilter.value || item.status === statusFilter.value
+      )
+      .filter(
+        (item) =>
+          !ratingFilter.value || item.rating === Number(ratingFilter.value)
+      );
+  };
 
-  if (ratingFilter.value) {
-    result = result.filter(
-      (item) => item.rating === Number(ratingFilter.value)
-    );
-  }
-  result.sort((a, b) => {
-    const aIsReading = a.status === "reading";
-    const bIsReading = b.status === "reading";
+  const sortManga = (items) => {
+    return items.sort((a, b) => {
+      const aIsReading = a.status === "reading";
+      const bIsReading = b.status === "reading";
 
-    if (aIsReading && !bIsReading) return -1;
-    if (!aIsReading && bIsReading) return 1;
+      if (aIsReading && !bIsReading) return -1;
+      if (!aIsReading && bIsReading) return 1;
+      switch (sortBy.value) {
+        case "rating-asc":
+          return a.rating - b.rating;
+        case "rating-desc":
+          return b.rating - a.rating;
+        default:
+          return 0;
+      }
+    });
+  };
 
-    if (sortBy.value === "rating-asc") {
-      return a.rating - b.rating;
-    } else if (sortBy.value === "rating-desc") {
-      return b.rating - a.rating;
-    }
-
-    return 0;
-  });
-  return result;
+  return sortManga(filterManga(manga.value));
 });
-
 const add = async (mangaData) => {
   try {
     await addDoc(collection(db, "manga"), {
       name: mangaData.name,
       chapter: mangaData.chapter,
-      status: mangaData.status,
-      rating: mangaData.rating,
+      status: mangaData.status || "reading",
+      rating: mangaData.rating || 0,
       timestamp: serverTimestamp(),
     });
     console.log("Adding Success");
