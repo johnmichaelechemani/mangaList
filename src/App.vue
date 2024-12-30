@@ -257,7 +257,10 @@ const addManga = () => {
           width="48"
           height="48"
         />
-        <p class="text-xs">No manga found matching "{{ search }}"</p>
+        <p class="text-xs">
+          No manga found matching
+          <span class="font-semibold">{{ search }}</span>
+        </p>
         <button
           @click="resetFilters"
           class="mt-2 text-xs text-blue-500 font-semibold border p-2"
