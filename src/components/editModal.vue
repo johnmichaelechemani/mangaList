@@ -3,9 +3,8 @@
     <div class="relative flex justify-center items-center h-full text-gray-800">
       <div class="relative bg-gray-200 border p-5">
         <form action="">
-          <!-- add manga -->
           <div class="flex justify-between items-center mb-2">
-            <p class="text-lg font-extrabold">Edit Manga Data</p>
+            <p class="text-lg font-extrabold">Edit Manga</p>
             <div @click="editManga">
               <Icon
                 icon="material-symbols-light:close"
