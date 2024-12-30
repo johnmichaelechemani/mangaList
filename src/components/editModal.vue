@@ -105,6 +105,6 @@ const editManga = () => {
 
 const edit = () => {
   editList(props.manga);
-  emit("close");
+  editManga();
 };
 </script>

@@ -92,39 +92,19 @@
 import { ref, defineProps, defineEmits } from "vue";
 import { Icon } from "@iconify/vue";
 
-// Define Props
 const props = defineProps({
-  /**
-   * Controls the visibility of the modal
-   * @type {boolean}
-   */
   showModal: {
     type: Boolean,
     required: true,
     default: false,
   },
 });
-
-// Define Emits
-const emit = defineEmits([
-  /**
-   * Emitted when the modal should be closed
-   */
-  "close",
-
-  /**
-   * Emitted when a new manga is added
-   */
-  "add-manga",
-]);
-
-// Reactive form data
+const emit = defineEmits(["close", "add-manga"]);
 const name = ref("");
 const chapter = ref(null);
 const status = ref("");
 const rating = ref(0);
 
-// Methods
 const addManga = () => {
   emit("close");
 };
