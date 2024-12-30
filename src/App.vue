@@ -112,13 +112,19 @@ const addManga = () => {
             icon="material-symbols-light:detector-status"
             width="24"
             height="24"
+            class="text-cyan-500"
           />
           Status
         </div>
         <div
           class="border px-1 text-xs font-semibold flex justify-start items-center"
         >
-          <Icon icon="material-symbols-light:star" width="24" height="24" />
+          <Icon
+            icon="material-symbols-light:star"
+            width="24"
+            height="24"
+            class="text-yellow-500"
+          />
           Ratings
         </div>
       </div>

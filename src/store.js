@@ -6,6 +6,7 @@ import {
   getDocs,
   query,
   where,
+  orderBy,
   onSnapshot,
 } from "firebase/firestore";
 
@@ -15,7 +16,10 @@ export const getManga = () => {
   const db = getFirestore();
 
   try {
-    const mangaQuery = query(collection(db, "manga"));
+    const mangaQuery = query(
+      collection(db, "manga"),
+      orderBy("timestamp", "desc")
+    );
     onSnapshot(mangaQuery, (querySnapshot) => {
       manga.value = querySnapshot.docs.map((doc) => ({
         id: doc.id,

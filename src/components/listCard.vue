@@ -4,33 +4,46 @@
     v-for="(item, index) in manga"
     :key="index"
   >
+    <div>
+      <p class="text-xs font-medium text-gray-500">
+        Added: {{ Time(item.timestamp) }}
+      </p>
+    </div>
     <div class="text-sm font-semibold capitalize">{{ item.name }}</div>
     <div class="flex justify-between items-center gap-1">
       <div class="flex justify-start items-center gap-2">
         <div
-          class="flex justify-start items-center gap-1 text-sm border px-1 text-blue-500 font-semibold"
+          class="flex justify-start items-center gap-1 text-sm border px-1 font-semibold"
         >
-          <Icon icon="material-symbols-light:book" width="24" height="24" />
+          <Icon
+            icon="material-symbols-light:book"
+            width="24"
+            height="24"
+            class="text-blue-500"
+          />
           {{ item.chapter }}
         </div>
         <div
-          :class="
-            item.status === 'ongoing' ? 'text-orange-500' : 'text-green-500'
-          "
           class="flex capitalize justify-start items-center gap-1 text-sm border px-1 font-semibold"
         >
           <Icon
             icon="material-symbols-light:detector-status"
             width="24"
             height="24"
+            :class="
+              item.status === 'ongoing' ? 'text-orange-500' : 'text-green-500'
+            "
           />{{ item.status }}
         </div>
         <div
-          class="flex justify-start items-center gap-1 text-sm border px-1 text-yellow-500 font-semibold"
+          class="flex justify-start items-center gap-1 text-sm border px-1 font-semibold"
         >
-          <Icon icon="material-symbols-light:star" width="24" height="24" />{{
-            item.rating
-          }}/5
+          <Icon
+            icon="material-symbols-light:star"
+            width="24"
+            height="24"
+            class="text-yellow-500"
+          />{{ item.rating }}/5
         </div>
       </div>
       <div class="gap-1 flex">
@@ -61,7 +74,7 @@
 <script setup>
 import { Icon } from "@iconify/vue";
 import { ref, defineProps } from "vue";
-import { editList, deleteList } from "@/composables";
+import { editList, deleteList, Time } from "@/composables";
 const props = defineProps({
   manga: {
     type: Object,
