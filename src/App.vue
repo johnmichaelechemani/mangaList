@@ -16,12 +16,42 @@ import listCard from "./components/listCard.vue";
 const db = getFirestore();
 const showModal = ref(false);
 ChartJS.register(ArcElement, Tooltip, Legend);
+const statusFilter = ref("");
+const ratingFilter = ref("");
+const sortBy = ref("");
+const search = ref("");
+const searchList = () => {};
 
-const filteredManga = computed(() => {
-  if (!search.value) return manga.value;
-  return manga.value.filter((item) =>
-    item.name.toLowerCase().includes(search.value.toLowerCase())
-  );
+const filteredAndSortedManga = computed(() => {
+  let result = manga.value;
+
+  // Filter by search
+  if (search.value) {
+    result = result.filter((item) =>
+      item.name.toLowerCase().includes(search.value.toLowerCase())
+    );
+  }
+
+  // Filter by status
+  if (statusFilter.value) {
+    result = result.filter((item) => item.status === statusFilter.value);
+  }
+
+  // Filter by rating
+  if (ratingFilter.value) {
+    result = result.filter(
+      (item) => item.rating === Number(ratingFilter.value)
+    );
+  }
+
+  // Sorting logic
+  if (sortBy.value === "rating-asc") {
+    result = result.sort((a, b) => a.rating - b.rating);
+  } else if (sortBy.value === "rating-desc") {
+    result = result.sort((a, b) => b.rating - a.rating);
+  }
+
+  return result;
 });
 
 const add = async (mangaData) => {
@@ -40,8 +70,12 @@ const add = async (mangaData) => {
   }
 };
 
-const search = ref("");
-const searchList = () => {};
+const resetFilters = () => {
+  search.value = "";
+  statusFilter.value = "";
+  ratingFilter.value = "";
+  sortBy.value = "";
+};
 
 onMounted(() => {
   getManga();
@@ -97,7 +131,8 @@ const addManga = () => {
           manga.length
         }}</span>
       </h1>
-      <div class="border my-2 p-2 flex justify-start items-center gap-2">
+
+      <div class="border my-2 p-2">
         <div class="text-xs font-semibold flex justify-start items-center">
           <Icon
             icon="material-symbols:filter-alt-outline"
@@ -107,32 +142,66 @@ const addManga = () => {
           />
           Filter:
         </div>
-        <div
-          class="border px-1 text-xs font-semibold flex justify-start items-center"
-        >
-          <Icon
-            icon="material-symbols-light:detector-status"
-            width="24"
-            height="24"
-            class="text-cyan-500"
-          />
-          Status
-        </div>
-        <div
-          class="border px-1 text-xs font-semibold flex justify-start items-center"
-        >
-          <Icon
-            icon="material-symbols-light:star"
-            width="24"
-            height="24"
-            class="text-yellow-500"
-          />
-          Ratings
+        <div class="grid grid-cols-2 gap-2">
+          <div
+            class="border px-1 text-xs font-semibold flex justify-start items-center"
+          >
+            <Icon
+              icon="material-symbols-light:detector-status"
+              width="24"
+              height="24"
+              class="text-cyan-500"
+            />
+            <select v-model="statusFilter" class="text-xs border w-full px-1">
+              <option value="">All Status</option>
+              <option value="Ongoing">Ongoing</option>
+              <option value="finished">Finished</option>
+              <option value="Dropped">Dropped</option>
+            </select>
+          </div>
+          <div
+            class="border px-1 text-xs font-semibold flex justify-start items-center"
+          >
+            <Icon
+              icon="material-symbols:filter-list-rounded"
+              width="24"
+              height="24"
+            />
+            <select v-model="sortBy" class="text-xs border w-full px-1">
+              <option value="">Sort</option>
+              <option value="rating-asc">Low to High</option>
+              <option value="rating-desc">High to Low</option>
+            </select>
+          </div>
+
+          <div
+            class="border px-1 text-xs font-semibold flex justify-start items-center"
+          >
+            <Icon
+              icon="material-symbols-light:star"
+              width="24"
+              height="24"
+              class="text-yellow-500"
+            />
+            <select v-model="ratingFilter" class="text-xs w-full border px-1">
+              <option value="">All Ratings</option>
+              <option value="1">1 Star</option>
+              <option value="2">2 Stars</option>
+              <option value="3">3 Stars</option>
+              <option value="4">4 Stars</option>
+              <option value="5">5 Stars</option>
+            </select>
+          </div>
+          <button
+            @click="resetFilters"
+            class="text-xs bg-gray-200 px-2 py-1 rounded"
+          >
+            Reset Filters
+          </button>
         </div>
       </div>
-
-      <template v-if="filteredManga.length > 0">
-        <listCard :manga="filteredManga" />
+      <template v-if="filteredAndSortedManga.length > 0">
+        <listCard :manga="filteredAndSortedManga" />
       </template>
       <div v-else class="text-center p-4 bg-gray-100 rounded-lg text-gray-500">
         <Icon
@@ -143,7 +212,7 @@ const addManga = () => {
         />
         <p class="text-xs">No manga found matching "{{ search }}"</p>
         <button
-          @click="search = ''"
+          @click="resetFilters"
           class="mt-2 text-xs text-blue-500 font-semibold border p-2"
         >
           Clear Search
