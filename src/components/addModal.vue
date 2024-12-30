@@ -1,7 +1,9 @@
 <template>
   <div v-if="showModal" class="fixed inset-0 z-50 bg-gray-800/30 backdrop-blur">
     <div class="relative flex justify-center items-center h-full text-gray-800">
-      <div class="relative bg-gray-200 border p-5">
+      <div
+        class="relative bg-gray-200/70 max-w-96 min-w-80 backdrop-blur-2xl border p-5"
+      >
         <form action="" @submit.prevent="add">
           <!-- add manga -->
           <div class="flex justify-between items-center mb-2">
@@ -22,7 +24,7 @@
                 type="text"
                 v-model="name"
                 required
-                class="border border-gray-700/50 p-1 text-xs w-full outline-none bg-transparent"
+                class="border border-gray-700/50 p-2 text-xs w-full outline-none bg-transparent"
               />
             </div>
             <div class="my-1">
@@ -31,7 +33,7 @@
                 v-model="chapter"
                 type="number"
                 required
-                class="border p-1 border-gray-700/50 text-xs w-full outline-none bg-transparent"
+                class="border p-2 border-gray-700/50 text-xs w-full outline-none bg-transparent"
               />
             </div>
             <div class="my-1">
@@ -41,7 +43,7 @@
                 id=""
                 required
                 v-model="status"
-                class="border p-1 border-gray-700/50 outline-none text-xs w-full bg-transparent"
+                class="border p-2 border-gray-700/50 outline-none text-xs w-full bg-transparent"
               >
                 <option value="ongoing">Ongoing</option>
                 <option value="finished">Finished</option>
@@ -55,7 +57,7 @@
                 id=""
                 required
                 v-model="rating"
-                class="border p-1 border-gray-700/50 outline-none text-xs w-full bg-transparent"
+                class="border p-2 border-gray-700/50 outline-none text-xs w-full bg-transparent"
               >
                 <option :value="1">1</option>
                 <option :value="2">2</option>
@@ -67,14 +69,14 @@
           </div>
           <div class="flex justify-start w-full items-center gap-2 my-2">
             <button
-              @click="clear"
-              class="w-32 border bg-gray-300 font-semibold text-sm py-2"
+              @click.prevent="clear"
+              class="w-full border bg-gray-300 font-semibold text-sm py-2"
             >
               Clear
             </button>
             <button
               type="submit"
-              class="w-32 bg-gray-800 text-white font-semibold text-sm py-2"
+              class="w-full bg-gray-800 text-white font-semibold text-sm py-2"
             >
               Add
             </button>
