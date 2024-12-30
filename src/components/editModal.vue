@@ -1,7 +1,9 @@
 <template>
   <div v-if="showModal" class="fixed inset-0 z-50 bg-gray-800/30 backdrop-blur">
     <div class="relative flex justify-center items-center h-full text-gray-800">
-      <div class="relative bg-gray-200 border p-5">
+      <div
+        class="relative bg-gray-200/50 min-w-80 max-w-96 backdrop-blur-2xl border p-5"
+      >
         <form action="">
           <div class="flex justify-between items-center mb-2">
             <p class="text-lg font-extrabold">Edit Manga</p>
@@ -63,13 +65,13 @@
           <div class="flex justify-start w-full items-center gap-2 my-2">
             <button
               @click.prevent="editManga"
-              class="w-32 border bg-gray-300 font-semibold text-sm py-2"
+              class="w-full border bg-gray-300 font-semibold text-sm py-2"
             >
               Cancel
             </button>
             <button
               @click.prevent="edit"
-              class="w-32 bg-gray-800 text-white font-semibold text-sm py-2"
+              class="w-full bg-gray-800 text-white font-semibold text-sm py-2"
             >
               Save Changes
             </button>
