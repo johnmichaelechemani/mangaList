@@ -30,17 +30,56 @@ export const getManga = () => {
   }
 };
 
-export const data = {
-  labels: ["Best", "Normal", "Poor", "Very Poor"],
-  datasets: [
-    {
-      backgroundColor: ["#41B883", "#E46651", "#00D8FF", "#DD1B16"],
-      data: [40, 20, 80, 10],
-    },
-  ],
-};
+// Updated store.js
+export const generateMangaRatingData = () => {
+  // Check if manga is populated
+  if (manga.value.length === 0)
+    return {
+      labels: [],
+      datasets: [{ data: [], backgroundColor: [] }],
+    };
 
+  // Create rating categories
+  const ratingCategories = {
+    Best: 0,
+    Good: 0,
+    Average: 0,
+    Poor: 0,
+    "Very Poor": 0,
+  };
+
+  // Count ratings
+  manga.value.forEach((item) => {
+    if ((item.rating === 5)) ratingCategories["Best"]++;
+    else if ((item.rating === 4)) ratingCategories["Good"]++;
+    else if ((item.rating === 3)) ratingCategories["Average"]++;
+    else if ((item.rating === 2)) ratingCategories["Poor"]++;
+    else ratingCategories["Very Poor"]++;
+  });
+
+  return {
+    labels: Object.keys(ratingCategories),
+    datasets: [
+      {
+        backgroundColor: [
+          "#41B883",
+          "#3498db",
+          "#f39c12",
+          "#e74c3c",
+          "#9b59b6",
+        ],
+        data: Object.values(ratingCategories),
+      },
+    ],
+  };
+};
 export const options = {
   responsive: true,
   maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: true,
+      position: "top",
+    },
+  },
 };

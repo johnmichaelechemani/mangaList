@@ -1,5 +1,5 @@
 <script setup>
-import { manga, getManga, options, data } from "./store";
+import { manga, getManga, options, generateMangaRatingData } from "./store";
 import { Icon } from "@iconify/vue";
 import { ref, onMounted, Transition, computed } from "vue";
 import {
@@ -74,7 +74,10 @@ const addManga = () => {
 
       <div class="flex justify-center items-center">
         <div class="size-48">
-          <Pie :data="data" :options="options" />
+          <Pie 
+    :data="generateMangaRatingData()" 
+    :options="options" 
+  />
         </div>
       </div>
       <div>
