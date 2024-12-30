@@ -195,6 +195,7 @@ const addManga = () => {
             />
             <select v-model="statusFilter" class="text-xs border w-full px-1">
               <option value="">All Status</option>
+              <option value="reading">Reading</option>
               <option value="ongoing">Ongoing</option>
               <option value="finished">Finished</option>
               <option value="dropped">Dropped</option>

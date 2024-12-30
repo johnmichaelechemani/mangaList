@@ -40,6 +40,7 @@
                 class="border p-1 border-gray-700/50 outline-none text-xs w-full bg-transparent"
               >
                 <option value="ongoing">Ongoing</option>
+                <option value="reading">Reading</option>
                 <option value="finished">Finished</option>
                 <option value="dropped">Dropped</option>
               </select>

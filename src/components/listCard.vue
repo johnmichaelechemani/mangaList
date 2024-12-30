@@ -1,12 +1,18 @@
 <template>
   <div
     class="border p-1 text-gray-800 mb-1"
+    :class="item.status === 'reading' ? 'border-blue-500/50' : ''"
     v-for="(item, index) in manga"
     :key="index"
   >
-    <div>
+    <div class="flex justify-start items-center gap-1">
       <p class="text-xs font-medium text-gray-500">
         Added: {{ Time(item.timestamp) }}
+      </p>
+      <p v-if="item.status === 'reading'">
+        <span class="text-xs bg-blue-500 text-white px-2 font-semibold"
+          >Reading</span
+        >
       </p>
     </div>
     <div class="text-sm font-semibold uppercase">{{ item.name }}</div>
@@ -33,8 +39,11 @@
             :class="{
               'text-orange-500': item.status === 'ongoing',
               'text-green-500': item.status === 'finished',
+              'text-blue-500': item.status === 'reading',
               'text-red-500':
-                item.status !== 'ongoing' && item.status !== 'finished',
+                item.status !== 'ongoing' &&
+                item.status !== 'finished' &&
+                item.status !== 'reading',
             }"
           />{{ item.status }}
         </div>
