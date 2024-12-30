@@ -1,7 +1,7 @@
 <template>
   <div
     class="border p-1 text-gray-800 mb-1"
-    :class="item.status === 'reading' ? 'border-blue-500/50' : ''"
+    :class="item.status === 'reading' ? 'border-blue-500/50 bg-blue-500/5' : ''"
     v-for="(item, index) in manga"
     :key="index"
   >

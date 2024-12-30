@@ -48,11 +48,21 @@ const filteredAndSortedManga = computed(() => {
       (item) => item.rating === Number(ratingFilter.value)
     );
   }
-  if (sortBy.value === "rating-asc") {
-    result = result.sort((a, b) => a.rating - b.rating);
-  } else if (sortBy.value === "rating-desc") {
-    result = result.sort((a, b) => b.rating - a.rating);
-  }
+  result.sort((a, b) => {
+    const aIsReading = a.status === "reading";
+    const bIsReading = b.status === "reading";
+
+    if (aIsReading && !bIsReading) return -1;
+    if (!aIsReading && bIsReading) return 1;
+
+    if (sortBy.value === "rating-asc") {
+      return a.rating - b.rating;
+    } else if (sortBy.value === "rating-desc") {
+      return b.rating - a.rating;
+    }
+
+    return 0;
+  });
   return result;
 });
 
