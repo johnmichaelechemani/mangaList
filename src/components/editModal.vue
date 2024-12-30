@@ -61,6 +61,18 @@
                 <option value="5">5</option>
               </select>
             </div>
+            <div class="my-1">
+              <p class="text-xs font-semibold">Country</p>
+              <select
+                required
+                v-model="manga.country"
+                class="border p-1 border-gray-700/50 outline-none text-xs w-full bg-transparent"
+              >
+                <option value="japan">Japan</option>
+                <option value="china">China</option>
+                <option value="for-south-korea">Korea</option>
+              </select>
+            </div>
           </div>
           <div class="flex justify-start w-full items-center gap-2 my-2">
             <button

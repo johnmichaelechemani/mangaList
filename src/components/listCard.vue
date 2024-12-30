@@ -5,15 +5,25 @@
     v-for="(item, index) in manga"
     :key="index"
   >
-    <div class="flex justify-start items-center gap-1">
-      <p class="text-xs font-medium text-gray-500">
-        Added: {{ Time(item.timestamp) }}
-      </p>
-      <p v-if="item.status === 'reading'">
-        <span class="text-xs bg-blue-500 text-white px-2 font-semibold"
-          >Reading</span
-        >
-      </p>
+    <div class="flex justify-between items-center gap-1">
+      <div class="flex justify-start items-center gap-1">
+        <p class="text-xs font-medium text-gray-500">
+          Added: {{ Time(item.timestamp) }}
+        </p>
+        <p v-if="item.status === 'reading'">
+          <span class="text-xs bg-blue-500 text-white px-2 font-semibold"
+            >Reading</span
+          >
+        </p>
+      </div>
+      <div>
+        <Icon
+          v-if="item.country"
+          :icon="`twemoji:flag-${item.country}`"
+          width="24"
+          height="24"
+        />
+      </div>
     </div>
     <div class="text-sm font-semibold uppercase">{{ item.name }}</div>
     <div class="flex justify-between items-center gap-1">
