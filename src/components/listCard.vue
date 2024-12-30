@@ -9,7 +9,7 @@
         Added: {{ Time(item.timestamp) }}
       </p>
     </div>
-    <div class="text-sm font-semibold capitalize">{{ item.name }}</div>
+    <div class="text-sm font-semibold uppercase">{{ item.name }}</div>
     <div class="flex justify-between items-center gap-1">
       <div class="flex justify-start items-center gap-2">
         <div

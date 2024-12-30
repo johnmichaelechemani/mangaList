@@ -121,16 +121,36 @@ const addManga = () => {
             Manga Total:
             <span class="text-sm font-extrabold">{{ manga.length }}</span>
           </div>
-          <div>
-            <p class="text-xs border px-1 mb-0.5 font-semibold">
-              Ongoing: {{ ongoing }}
-            </p>
-            <p class="text-xs border px-1 mb-0.5 font-semibold">
-              Finished: {{ finished }}
-            </p>
-            <p class="text-xs border px-1 mb-0.5 font-semibold">
-              Dropped: {{ dropped }}
-            </p>
+          <div class="flex justify-start items-center gap-1">
+            <div
+              class="text-xs flex justify-start items-center border p-1 font-semibold"
+            >
+              <Icon
+                icon="material-symbols-light:downloading"
+                width="20"
+                height="20"
+              /><span class="text-orange-600">{{ ongoing }}</span>
+            </div>
+            <div
+              class="text-xs flex justify-start items-center border p-1 font-semibold"
+            >
+              <Icon
+                icon="lets-icons:flag-finish-alt-light"
+                width="20"
+                height="20"
+              />
+              <span class="text-green-500">{{ finished }}</span>
+            </div>
+            <div
+              class="text-xs flex justify-start items-center border p-1 font-semibold"
+            >
+              <Icon
+                icon="material-symbols-light:logout"
+                width="20"
+                height="20"
+              />
+              <span class="text-red-500">{{ dropped }}</span>
+            </div>
           </div>
         </div>
         <div class="size-48">
