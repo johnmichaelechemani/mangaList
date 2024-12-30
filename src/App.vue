@@ -118,7 +118,7 @@ const addManga = () => {
           <div
             class="text-xs font-semibold flex justify-start items-center gap-1"
           >
-            Mangas Total:
+            Manga Total:
             <span class="text-sm font-extrabold">{{ manga.length }}</span>
           </div>
           <div>
