@@ -47,6 +47,7 @@
               >
                 <option value="ongoing">Ongoing</option>
                 <option value="finished">Finished</option>
+                <option value="dropped">Dropped</option>
               </select>
             </div>
             <div class="my-1">
