@@ -140,7 +140,7 @@ const addManga = () => {
       <div>
         <button
           @click="addManga"
-          class="w-32 bg-gray-800 my-2 text-white font-semibold text-sm py-2"
+          class="bg-gray-800 my-2 w-full text-white font-semibold text-sm py-2"
         >
           Add Manga
         </button>

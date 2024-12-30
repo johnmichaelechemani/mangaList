@@ -61,7 +61,7 @@
           />
         </button>
         <button
-          @click="deleteList(item.id)"
+          @click="deleteManga(item)"
           class="font-medium text-red-500 border border-red-500/20 px-1 py-0.5"
         >
           <Icon
@@ -82,12 +82,21 @@
       @edit-manga="close"
     />
   </transition>
+  <transition>
+    <DeleteModal
+      :show-modal="showModalDelete"
+      :manga="selected"
+      @close="showModalDelete = false"
+      @delete-manga="close"
+    />
+  </transition>
 </template>
 <script setup>
 import { Icon } from "@iconify/vue";
 import { ref, defineProps } from "vue";
-import { deleteList, Time } from "@/composables";
+import { Time } from "@/composables";
 import EditModal from "./editModal.vue";
+import DeleteModal from "./deleteModal.vue";
 const props = defineProps({
   manga: {
     type: Object,
@@ -95,13 +104,19 @@ const props = defineProps({
   },
 });
 const showEditModal = ref(false);
+const showModalDelete = ref(false);
 const selected = ref([]);
 const editManga = (item) => {
   selected.value = item;
   showEditModal.value = !showEditModal.value;
 };
+const deleteManga = (item) => {
+  selected.value = item;
+  showModalDelete.value = !showModalDelete.value;
+};
 const close = () => {
   selected.value = [];
   showEditModal.value = false;
+  showModalDelete.value = false;
 };
 </script>
