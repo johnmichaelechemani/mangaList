@@ -97,6 +97,31 @@ const addManga = () => {
           manga.length
         }}</span>
       </h1>
+      <div class="border my-2 p-2 flex justify-start items-center gap-2">
+        <p>
+          <Icon
+            icon="material-symbols:filter-alt-outline"
+            width="24"
+            height="24"
+          />
+        </p>
+        <div
+          class="border px-1 text-xs font-semibold flex justify-start items-center"
+        >
+          <Icon
+            icon="material-symbols-light:detector-status"
+            width="24"
+            height="24"
+          />
+          Status
+        </div>
+        <div
+          class="border px-1 text-xs font-semibold flex justify-start items-center"
+        >
+          <Icon icon="material-symbols-light:star" width="24" height="24" />
+          Ratings
+        </div>
+      </div>
 
       <template v-if="filteredManga.length > 0">
         <listCard :manga="filteredManga" />
