@@ -33,6 +33,9 @@ const add = async (mangaData) => {
   }
 };
 
+const search = ref("");
+const searchList = () => {};
+
 onMounted(() => {
   getManga();
 });
@@ -50,6 +53,17 @@ const addManga = () => {
         Designed in Phone Screen
       </h1>
       <h1 class="font-bold text-lg mb-2">Manga Ratings by Me</h1>
+
+      <div class="border shadow flex justify-start items-center gap-1">
+        <input type="search" v-model="search" class="w-full outline-none p-2" />
+        <button class="p-2" @click="searchList">
+          <Icon
+            icon="material-symbols-light:search-rounded"
+            width="24"
+            height="24"
+          />
+        </button>
+      </div>
 
       <div class="flex justify-center items-center">
         <div class="size-48">
