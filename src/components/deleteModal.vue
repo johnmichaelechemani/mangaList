@@ -1,7 +1,9 @@
 <template>
   <div v-if="showModal" class="fixed inset-0 z-50 bg-gray-800/30 backdrop-blur">
     <div class="relative flex justify-center items-center h-full text-gray-800">
-      <div class="relative bg-gray-200/50 backdrop-blur-2xl border p-5">
+      <div
+        class="relative bg-gray-200/50 min-w-80 max-w-96 backdrop-blur-2xl border p-5"
+      >
         <p class="text-lg font-extrabold">Delete Manga</p>
         <p class="text-xs font-semibold text-gray-700">
           Are you sure to delete
