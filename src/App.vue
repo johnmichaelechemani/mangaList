@@ -98,13 +98,15 @@ const addManga = () => {
         }}</span>
       </h1>
       <div class="border my-2 p-2 flex justify-start items-center gap-2">
-        <p>
+        <div class="text-xs font-semibold flex justify-start items-center">
           <Icon
             icon="material-symbols:filter-alt-outline"
             width="24"
             height="24"
+            class="text-blue-400"
           />
-        </p>
+          Filter:
+        </div>
         <div
           class="border px-1 text-xs font-semibold flex justify-start items-center"
         >
