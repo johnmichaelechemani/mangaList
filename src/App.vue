@@ -76,6 +76,7 @@ const add = async (mangaData) => {
       chapter: mangaData.chapter,
       status: mangaData.status || "reading",
       rating: mangaData.rating || 0,
+      country: mangaData.country,
       timestamp: serverTimestamp(),
     });
     console.log("Adding Success");
