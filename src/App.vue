@@ -12,6 +12,9 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "vue-chartjs";
 import AddModal from "./components/addModal.vue";
 import listCard from "./components/listCard.vue";
+import ChartLoading from "./components/ChartLoading.vue";
+import InfoLoading from "./components/InfoLoading.vue";
+import ListLoading from "./components/ListLoading.vue";
 
 const db = getFirestore();
 const showModal = ref(false);
@@ -172,7 +175,9 @@ const addManga = () => {
         </div>
         <div class="size-48">
           <Pie :data="generateMangaRatingData()" :options="options" />
+          
         </div>
+      
       </div>
       <div>
         <button
@@ -182,6 +187,9 @@ const addManga = () => {
           Add Manga
         </button>
       </div>
+
+      <ChartLoading/>
+      <InfoLoading/>
 
       <h1 class="font-bold text-lg my-2">
         Manga Lists
