@@ -1,6 +1,6 @@
 <template>
-  <div class="flex justify-center items-center">
-    <div>
+  <div class="flex justify-start w-full items-center" v-for="i in 5" :key="i">
+    <div class="w-full border my-1 p-2">
       <div
         class="flex animate-pulse flex-wrap justify-start items-center gap-1"
       >

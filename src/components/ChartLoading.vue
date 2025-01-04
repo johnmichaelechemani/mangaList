@@ -1,9 +1,11 @@
 <template>
-  <div class="flex justify-center items-center">
+  <div class="flex justify-center items-center border p-2">
     <div>
       <div
         class="flex animate-pulse flex-wrap justify-center items-center gap-2"
       >
+        <div class="h-3 bg-gray-300 w-10"></div>
+        <div class="h-3 bg-gray-300 w-10"></div>
         <div class="h-3 bg-gray-300 w-10"></div>
         <div class="h-3 bg-gray-300 w-10"></div>
         <div class="h-3 bg-gray-300 w-10"></div>

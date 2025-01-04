@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center items-center">
+  <div class="flex justify-center items-center border p-2 mr-1">
     <div>
       <div
         class="flex animate-pulse flex-wrap justify-start items-center gap-2"

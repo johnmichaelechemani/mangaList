@@ -11,26 +11,33 @@ import {
 } from "firebase/firestore";
 
 export const manga = ref([]);
+export const isMangaLoading = ref(false);
 
-export const getManga = () => {
+export const getManga = async () => {
   const db = getFirestore();
-
   try {
+    isMangaLoading.value = true;
     const mangaQuery = query(
       collection(db, "manga"),
       orderBy("timestamp", "desc")
     );
-    onSnapshot(mangaQuery, (querySnapshot) => {
-      manga.value = querySnapshot.docs.map((doc) => ({
+    const querySnapshot = await getDocs(mangaQuery);
+    manga.value = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    onSnapshot(mangaQuery, (snapshot) => {
+      manga.value = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
     });
-
-    return manga.value;
   } catch (error) {
-    console.error("Error fetching manga:", error);
+    //console.error("Error fetching manga:", error);
     return [];
+  } finally {
+    isMangaLoading.value = false;
+    //  console.log("Finished fetching manga.");
   }
 };
 

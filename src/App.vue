@@ -1,5 +1,11 @@
 <script setup>
-import { manga, getManga, options, generateMangaRatingData } from "./store";
+import {
+  manga,
+  getManga,
+  isMangaLoading,
+  options,
+  generateMangaRatingData,
+} from "./store";
 import { Icon } from "@iconify/vue";
 import { ref, onMounted, Transition, computed } from "vue";
 import {
@@ -130,8 +136,8 @@ const addManga = () => {
         </button>
       </div>
 
-      <div class="flex justify-start items-start pt-3">
-        <div class="w-full border p-2">
+      <div class="flex justify-center items-start pt-3">
+        <div v-if="!isMangaLoading" class="w-full border p-2">
           <div
             class="text-xs font-semibold flex justify-start items-center gap-1"
           >
@@ -173,11 +179,15 @@ const addManga = () => {
             </div>
           </div>
         </div>
+        <InfoLoading v-else />
         <div class="size-48">
-          <Pie :data="generateMangaRatingData()" :options="options" />
-          
+          <Pie
+            v-if="!isMangaLoading"
+            :data="generateMangaRatingData()"
+            :options="options"
+          />
+          <ChartLoading v-if="isMangaLoading" />
         </div>
-      
       </div>
       <div>
         <button
@@ -188,16 +198,18 @@ const addManga = () => {
         </button>
       </div>
 
-      <ChartLoading/>
-      <InfoLoading/>
-      <ListLoading/>
-
-      <h1 class="font-bold text-lg my-2">
+      <div class="font-bold flex justify-start items-center gap-2 text-lg my-2">
         Manga Lists
-        <span class="text-sm bg-gray-800 text-white px-2 rounded-full">{{
-          manga.length
-        }}</span>
-      </h1>
+        <span
+          v-if="!isMangaLoading"
+          class="text-sm bg-gray-800 text-white px-2 rounded-full"
+          >{{ manga.length }}</span
+        >
+        <div
+          v-else
+          class="w-5 h-5 animate-pulse bg-gray-300 rounded-full"
+        ></div>
+      </div>
 
       <div class="border my-2 p-2">
         <div class="text-xs font-semibold flex justify-start items-center">
@@ -274,27 +286,33 @@ const addManga = () => {
           </button>
         </div>
       </div>
-      <template v-if="filteredAndSortedManga.length > 0">
-        <listCard :manga="filteredAndSortedManga" />
-      </template>
-      <div v-else class="text-center p-4 bg-gray-100 rounded-lg text-gray-500">
-        <Icon
-          icon="mdi:book-search-outline"
-          class="mx-auto mb-2"
-          width="48"
-          height="48"
-        />
-        <p class="text-xs">
-          No manga found matching
-          <span class="font-semibold">{{ search }}</span>
-        </p>
-        <button
-          @click="resetFilters"
-          class="mt-2 text-xs text-blue-500 font-semibold border p-2"
+      <div v-if="!isMangaLoading">
+        <template v-if="filteredAndSortedManga.length > 0">
+          <listCard :manga="filteredAndSortedManga" />
+        </template>
+        <div
+          v-else
+          class="text-center p-4 bg-gray-100 rounded-lg text-gray-500"
         >
-          Clear Search
-        </button>
+          <Icon
+            icon="mdi:book-search-outline"
+            class="mx-auto mb-2"
+            width="48"
+            height="48"
+          />
+          <p class="text-xs">
+            No manga found matching
+            <span class="font-semibold">{{ search }}</span>
+          </p>
+          <button
+            @click="resetFilters"
+            class="mt-2 text-xs text-blue-500 font-semibold border p-2"
+          >
+            Clear Search
+          </button>
+        </div>
       </div>
+      <ListLoading v-else />
     </div>
   </div>
 
