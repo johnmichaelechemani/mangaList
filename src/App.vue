@@ -190,6 +190,7 @@ const addManga = () => {
 
       <ChartLoading/>
       <InfoLoading/>
+      <ListLoading/>
 
       <h1 class="font-bold text-lg my-2">
         Manga Lists
