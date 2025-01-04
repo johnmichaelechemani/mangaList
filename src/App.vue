@@ -143,27 +143,30 @@ const addManga = () => {
                 icon="material-symbols-light:downloading"
                 width="20"
                 height="20"
-              /><span class="text-orange-600">{{ ongoing }}</span>
+                class="text-orange-500"
+              /><span class="">{{ ongoing }}</span>
             </div>
             <div
               class="text-xs flex justify-start items-center border p-1 font-semibold"
             >
               <Icon
-                icon="lets-icons:flag-finish-alt-light"
+                icon="material-symbols-light:done"
                 width="20"
                 height="20"
+                class="text-green-500"
               />
-              <span class="text-green-500">{{ finished }}</span>
+              <span class="">{{ finished }}</span>
             </div>
             <div
               class="text-xs flex justify-start items-center border p-1 font-semibold"
             >
               <Icon
-                icon="material-symbols-light:logout"
+                icon="material-symbols-light:trending-down"
                 width="20"
                 height="20"
+                class="text-red-500"
               />
-              <span class="text-red-500">{{ dropped }}</span>
+              <span class="">{{ dropped }}</span>
             </div>
           </div>
         </div>

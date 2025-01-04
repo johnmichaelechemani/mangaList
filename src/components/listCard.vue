@@ -12,7 +12,7 @@
         </p>
         <div
           v-if="item.status === 'reading'"
-          class="flex items-center border px-1 py-0.5"
+          class="flex items-center border border-blue-500/50 px-1 py-0.5"
         >
           <span
             ><Icon
