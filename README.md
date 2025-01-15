@@ -16,7 +16,18 @@ Data visualizations
 
 # PROJECT IMAGES
 
+# Home
+
 ![Project Screenshot](./src/assets/images/ss1.png)
+
+# Add Modal
+
 ![Project Screenshot](./src/assets/images/ss2.png)
+
+# delete Modal
+
 ![Project Screenshot](./src/assets/images/ss3.png)
+
+# Edit Modal
+
 ![Project Screenshot](./src/assets/images/ss4.png)
