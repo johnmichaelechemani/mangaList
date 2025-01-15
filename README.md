@@ -24,7 +24,7 @@ Data visualizations
 
 ![Project Screenshot](./src/assets/images/ss2.png)
 
-# delete Modal
+# Delete Modal
 
 ![Project Screenshot](./src/assets/images/ss3.png)
 
