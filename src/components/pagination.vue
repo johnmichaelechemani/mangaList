@@ -36,15 +36,31 @@ import { Icon } from "@iconify/vue";
 import { ref } from "vue";
 
 const currentPage = ref(1);
-const totalPage = ref(100);
+const totalPage = ref(10);
 const totalItems = ref(500);
 
-const page = ref([{}]);
+const page = ref([
+  { id: 1, title: "Item 1" },
+  { id: 2, title: "Item 2"},
+  { id: 3, title: "Item 3" },
+]);
 
 const prev = () => {
-  console.log(currentPage.value);
+  if (currentPage.value > 1) {
+    currentPage.value--;
+    console.log(`Previous Page: ${currentPage.value}`);
+    console.log(page.value);
+  } else {
+    console.log("Already on the first page");
+  }
 };
 const next = () => {
-  console.log(totalPage.value);
+  if (currentPage.value < totalPage.value) {
+    currentPage.value++;
+    console.log(`Next Page: ${currentPage.value}`);
+    console.log(page.value);
+  } else {
+    console.log("Already on the last page");
+  }
 };
 </script>
