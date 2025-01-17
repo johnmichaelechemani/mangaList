@@ -3,7 +3,7 @@
     <select
       class="text-xs border w-full outline-none rounded-full px-2 font-semibold"
     >
-      <option value="">All</option>
+      <option value="">All ({{ totalItems }})</option>
       <option value="reading">10</option>
       <option value="ongoing">25</option>
       <option value="dropped">50</option>
@@ -17,9 +17,9 @@
         />
       </button>
       <div
-        class="px-2 border rounded-full py-1 text-xs shadow-sm font-semibold"
+        class="px-2 border rounded-full py-1 text-xs flex gap-0.5 shadow-sm font-semibold"
       >
-        {{ currentPage }}<span class="text-gray-400">/</span>{{ totalPage }}
+        {{ currentPage }}<span class="text-gray-300">/</span>{{ totalPage }}
       </div>
       <button @click="next" class="p-1 hover:bg-gray-400/20 rounded-full">
         <Icon
@@ -37,6 +37,9 @@ import { ref } from "vue";
 
 const currentPage = ref(1);
 const totalPage = ref(100);
+const totalItems = ref(500);
+
+const page = ref([{}]);
 
 const prev = () => {
   console.log(currentPage.value);
