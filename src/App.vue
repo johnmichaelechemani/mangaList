@@ -30,6 +30,8 @@ const statusFilter = ref("");
 const ratingFilter = ref("");
 const sortBy = ref("");
 const search = ref("");
+
+// search function
 const searchList = () => {};
 
 const ongoing = computed(() => {
