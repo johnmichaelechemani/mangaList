@@ -1,8 +1,8 @@
 <template>
   <div v-if="showModal" class="fixed inset-0 z-50 bg-gray-800/30 backdrop-blur">
-    <div class="relative flex justify-center items-center h-full text-gray-800">
+    <div class="relative flex justify-center items-center h-full text-gray-300">
       <div
-        class="relative bg-gray-200/70 max-w-96 min-w-80 backdrop-blur-2xl border p-5"
+        class="relative bg-gray-800/70 max-w-96 min-w-80 backdrop-blur-2xl border border-gray-500/20 p-5"
       >
         <form action="" @submit.prevent="add">
           <!-- add manga -->
@@ -45,10 +45,10 @@
                 v-model="status"
                 class="border p-2 border-gray-700/50 outline-none text-xs w-full bg-transparent"
               >
-                <option value="ongoing">Ongoing</option>
-                <option value="reading">Reading</option>
-                <option value="finished">Finished</option>
-                <option value="dropped">Dropped</option>
+                <option value="ongoing" class="bg-gray-800">Ongoing</option>
+                <option value="reading" class="bg-gray-800">Reading</option>
+                <option value="finished" class="bg-gray-800">Finished</option>
+                <option value="dropped" class="bg-gray-800">Dropped</option>
               </select>
             </div>
             <div class="my-1">
@@ -61,11 +61,11 @@
                 v-model="rating"
                 class="border p-2 border-gray-700/50 outline-none text-xs w-full bg-transparent"
               >
-                <option :value="1">1</option>
-                <option :value="2">2</option>
-                <option :value="3">3</option>
-                <option :value="4">4</option>
-                <option :value="5">5</option>
+                <option :value="1" class="bg-gray-800">1</option>
+                <option :value="2" class="bg-gray-800">2</option>
+                <option :value="3" class="bg-gray-800">3</option>
+                <option :value="4" class="bg-gray-800">4</option>
+                <option :value="5" class="bg-gray-800">5</option>
               </select>
             </div>
             <div class="my-1">

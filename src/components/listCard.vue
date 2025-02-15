@@ -1,6 +1,6 @@
 <template>
   <div
-    class="border p-1 text-gray-800 mb-1"
+    class="border border-gray-500/20  p-1 text-gray-300 mb-1"
     :class="item.status === 'reading' ? 'border-blue-500/50 bg-blue-500/5' : ''"
     v-for="(item, index) in manga"
     :key="index"
@@ -37,7 +37,7 @@
     <div class="flex justify-between items-center my-1 gap-1">
       <div class="flex justify-start items-center gap-2">
         <div
-          class="flex justify-start items-center gap-1 text-xs border px-2 py-0.5 font-medium"
+          class="flex justify-start items-center border-gray-500/20  gap-1 text-xs border px-2 py-0.5 font-medium"
         >
           <Icon
             icon="material-symbols-light:menu-book-outline"
@@ -48,7 +48,7 @@
           {{ item.chapter }}
         </div>
         <div
-          class="flex capitalize justify-start items-center gap-1 text-xs border px-2 py-0.5 font-medium"
+          class="flex capitalize justify-start items-center border-gray-500/20  gap-1 text-xs border px-2 py-0.5 font-medium"
         >
           <Icon
             :icon="getStatusIcon(item.status)"
@@ -59,7 +59,7 @@
           {{ item.status }}
         </div>
         <div
-          class="flex justify-start items-center gap-1 text-xs border px-2 py-0.5 font-medium"
+          class="flex justify-start items-center gap-1 text-xs border border-gray-500/20  px-2 py-0.5 font-medium"
         >
           <Icon
             icon="material-symbols-light:star-outline"

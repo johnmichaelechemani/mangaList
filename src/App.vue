@@ -114,21 +114,23 @@ const addManga = () => {
 </script>
 
 <template>
-  <div class="flex justify-center items-start text-gray-800">
-    <div class="border p-5 w-full sm:max-w-96">
+  <div class="flex justify-center items-start bg-gray-900 text-gray-300">
+    <div class="border border-gray-500/20 p-5 w-full sm:max-w-96">
       <h1
-        class="font-semibold text-center border p-2 text-xs hidden sm:block mb-2"
+        class="font-semibold text-center border-gray-500/20 border p-2 text-xs hidden sm:block mb-2"
       >
         Designed in Phone Screen
       </h1>
       <h1 class="font-bold text-lg mb-2">Manga Ratings by Me</h1>
 
-      <div class="border shadow flex justify-start items-center gap-1">
+      <div
+        class="border-gray-500/20 border shadow flex justify-start items-center gap-1"
+      >
         <input
           type="search"
           v-model="search"
           placeholder="Search Manga.."
-          class="placeholder:text-sm w-full outline-none p-2"
+          class="placeholder:text-sm w-full bg-transparent outline-none p-2"
         />
         <button class="p-2" @click="searchList">
           <Icon
@@ -140,7 +142,10 @@ const addManga = () => {
       </div>
 
       <div class="flex justify-center items-start pt-3">
-        <div v-if="!isMangaLoading" class="w-full border p-2">
+        <div
+          v-if="!isMangaLoading"
+          class="w-full border-gray-500/20 border p-2"
+        >
           <div
             class="text-xs font-semibold flex justify-start items-center gap-1"
           >
@@ -149,7 +154,7 @@ const addManga = () => {
           </div>
           <div class="flex justify-start items-center gap-1">
             <div
-              class="text-xs flex justify-start items-center border p-1 font-semibold"
+              class="text-xs flex justify-start items-center border-gray-500/20 border p-1 font-semibold"
             >
               <Icon
                 icon="material-symbols-light:downloading"
@@ -159,7 +164,7 @@ const addManga = () => {
               /><span class="">{{ ongoing }}</span>
             </div>
             <div
-              class="text-xs flex justify-start items-center border p-1 font-semibold"
+              class="text-xs flex justify-start items-center border-gray-500/20 border p-1 font-semibold"
             >
               <Icon
                 icon="material-symbols-light:done"
@@ -170,7 +175,7 @@ const addManga = () => {
               <span class="">{{ finished }}</span>
             </div>
             <div
-              class="text-xs flex justify-start items-center border p-1 font-semibold"
+              class="text-xs flex justify-start items-center border-gray-500/20 border p-1 font-semibold"
             >
               <Icon
                 icon="material-symbols-light:trending-down"
@@ -214,7 +219,7 @@ const addManga = () => {
         ></div>
       </div>
 
-      <div class="border my-2 p-2">
+      <div class="border-gray-500/20 border my-2 p-2">
         <div class="text-xs font-semibold flex justify-start items-center">
           <Icon
             icon="material-symbols:filter-alt-outline"
@@ -226,7 +231,7 @@ const addManga = () => {
         </div>
         <div class="grid grid-cols-2 gap-1">
           <div
-            class="border px-1 text-xs font-semibold flex justify-start items-center"
+            class="border-gray-500/20 border px-1 text-xs font-semibold flex justify-start items-center"
           >
             <Icon
               icon="material-symbols-light:detector-status"
@@ -234,31 +239,41 @@ const addManga = () => {
               height="24"
               class="text-cyan-500"
             />
-            <select v-model="statusFilter" class="text-xs border w-full px-1">
-              <option value="">All Status</option>
-              <option value="reading">Reading</option>
-              <option value="ongoing">Ongoing</option>
-              <option value="finished">Finished</option>
-              <option value="dropped">Dropped</option>
+            <select
+              v-model="statusFilter"
+              class="text-xs border-gray-500/20 border bg-transparent outline-none w-full px-1"
+            >
+              <option value="" class="bg-gray-800">All Status</option>
+              <option value="reading" class="bg-gray-800">Reading</option>
+              <option value="ongoing" class="bg-gray-800">Ongoing</option>
+              <option value="finished" class="bg-gray-800">Finished</option>
+              <option value="dropped" class="bg-gray-800">Dropped</option>
             </select>
           </div>
           <div
-            class="border px-1 text-xs font-semibold flex justify-start items-center"
+            class="border-gray-500/20 border px-1 text-xs font-semibold flex justify-start items-center"
           >
             <Icon
               icon="material-symbols:filter-list-rounded"
               width="24"
               height="24"
             />
-            <select v-model="sortBy" class="text-xs border w-full px-1">
-              <option value="">Sort</option>
-              <option value="rating-asc">Low to High</option>
-              <option value="rating-desc">High to Low</option>
+            <select
+              v-model="sortBy"
+              class="text-xs border-gray-500/20 border w-full px-1 outline-none bg-transparent s"
+            >
+              <option value="" class="bg-gray-800">Sort</option>
+              <option value="rating-asc" class="bg-gray-800">
+                Low to High
+              </option>
+              <option value="rating-desc" class="bg-gray-800">
+                High to Low
+              </option>
             </select>
           </div>
 
           <div
-            class="border px-1 text-xs font-semibold flex justify-start items-center"
+            class="border-gray-500/20 border px-1 text-xs font-semibold flex justify-start items-center"
           >
             <Icon
               icon="material-symbols-light:star"
@@ -266,18 +281,21 @@ const addManga = () => {
               height="24"
               class="text-yellow-500"
             />
-            <select v-model="ratingFilter" class="text-xs w-full border px-1">
-              <option value="">All Ratings</option>
-              <option value="1">1 Star</option>
-              <option value="2">2 Stars</option>
-              <option value="3">3 Stars</option>
-              <option value="4">4 Stars</option>
-              <option value="5">5 Stars</option>
+            <select
+              v-model="ratingFilter"
+              class="text-xs w-full border-gray-500/20 border px-1 outline-none bg-transparent"
+            >
+              <option value="" class="bg-gray-800">All Ratings</option>
+              <option value="1" class="bg-gray-800">1 Star</option>
+              <option value="2" class="bg-gray-800">2 Stars</option>
+              <option value="3" class="bg-gray-800">3 Stars</option>
+              <option value="4" class="bg-gray-800">4 Stars</option>
+              <option value="5" class="bg-gray-800">5 Stars</option>
             </select>
           </div>
           <button
             @click="resetFilters"
-            class="border px-1 gap-1 text-xs font-semibold flex justify-start items-center"
+            class="border-gray-500/20 border px-1 gap-1 text-xs font-semibold flex justify-start items-center"
           >
             <Icon
               icon="material-symbols-light:reset-wrench-outline-rounded"
@@ -314,7 +332,7 @@ const addManga = () => {
           </p>
           <button
             @click="resetFilters"
-            class="mt-2 text-xs text-blue-500 font-semibold border p-2"
+            class="mt-2 text-xs text-blue-500 font-semibold border-gray-500/20 border p-2"
           >
             Clear Search
           </button>
