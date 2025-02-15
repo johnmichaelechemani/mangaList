@@ -121,7 +121,7 @@ const addManga = () => {
       >
         Designed in Phone Screen
       </h1>
-      <h1 class="font-bold text-lg mb-2">Manga Ratings by Me</h1>
+      <h1 class="font-bold text-lg mb-2">Manga Management</h1>
 
       <div
         class="border-gray-500/20 border shadow flex justify-start items-center gap-1"
@@ -200,7 +200,7 @@ const addManga = () => {
       <div>
         <button
           @click="addManga"
-          class="bg-gray-800 my-2 w-full text-white font-semibold text-sm py-2"
+          class="bg-blue-500/10 border border-blue-500/20 my-2 w-full text-blue-500 font-semibold text-sm py-2"
         >
           Add Manga
         </button>

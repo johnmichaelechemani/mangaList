@@ -38,7 +38,7 @@ import { ref } from "vue";
 
 const currentPage = ref(1);
 const totalPage = ref(10);
-const totalItems = ref(500);
+const totalItems = ref(88);
 
 const page = ref([
   { id: 1, title: "Item 1" },
