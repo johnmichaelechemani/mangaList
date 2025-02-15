@@ -78,22 +78,24 @@
                 v-model="country"
                 class="border p-2 border-gray-700/50 outline-none text-xs w-full bg-transparent"
               >
-                <option value="japan">Japan</option>
-                <option value="china">China</option>
-                <option value="for-south-korea">Korea</option>
+                <option value="japan" class="bg-gray-800">Japan</option>
+                <option value="china" class="bg-gray-800">China</option>
+                <option value="for-south-korea" class="bg-gray-800">
+                  Korea
+                </option>
               </select>
             </div>
           </div>
           <div class="flex justify-start w-full items-center gap-2 my-2">
             <button
               @click.prevent="clear"
-              class="w-full border bg-gray-300 font-semibold text-sm py-2"
+              class="w-full border bg-gray-800/80 border-gray-500/50 font-semibold text-sm py-2"
             >
               Clear
             </button>
             <button
               type="submit"
-              class="w-full bg-gray-800 text-white font-semibold text-sm py-2"
+              class="w-full border bg-green-500/20 border-green-500/50 text-green-500 font-semibold text-sm py-2"
             >
               Add
             </button>
